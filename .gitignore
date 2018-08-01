@@ -1,0 +1,15 @@
+# Project dependencies
+.cache
+node_modules
+yarn-error.log
+.env
+.env.example
+.env.local
+.env.staging
+# Build directory
+/public
+.DS_Store
+.env
+.env.example
+.env.local
+.env.staging

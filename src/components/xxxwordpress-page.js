@@ -1,0 +1,72 @@
+import React, { Component } from 'react'
+import { Link, graphql } from 'gatsby'
+//import ClockIcon from "react-icons/lib/fa/clock-o"
+
+import Layout from '../components/layout'
+//import PostIcons from "../components/PostIcons"
+
+//import { rhythm } from "../utils/typography"
+
+class Home extends Component {
+  render() {
+    const data = this.props.data
+
+    return (
+      <Layout>
+        <div css={{ marginBottom: 1 }}>
+          <h1>Pages</h1>
+          {data.allWordpressPage.edges.map(({ node }) => (
+            <div key={node.slug}>
+              <Link to={node.slug} css={{ textDecoration: `none` }}>
+                <h3>{node.title}</h3>
+              </Link>
+              <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+              <span>
+                {` `}
+                {node.date}
+              </span>
+            </div>
+          ))}
+        </div>
+        <hr />
+        <h1>Posts</h1>
+        {data.allWordpressPost.edges.map(({ node }) => (
+          <div css={{ marginBottom: 1 }} key={node.slug}>
+            <Link to={node.slug} css={{ textDecoration: `none` }}>
+              <h3>{node.title}</h3>
+            </Link>
+            <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+          </div>
+        ))}
+      </Layout>
+    )
+  }
+}
+
+export default Home
+
+// Set here the ID of the home page.
+export const pageQuery = graphql`
+  query {
+    allWordpressPage {
+      edges {
+        node {
+          id
+          title
+          excerpt
+          slug
+          date(formatString: "MMMM DD, YYYY")
+        }
+      }
+    }
+    allWordpressPost(sort: { fields: [date] }) {
+      edges {
+        node {
+          title
+          excerpt
+          slug
+        }
+      }
+    }
+  }
+`
