@@ -1,15 +1,42 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React, { Component } from 'react'
+import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 
-const BlogPage = () => (
-  <Layout>
-    <h1>Blog page</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+class BlogPage extends Component {
+  render() {
+    const data = this.props.data
+
+    return (
+      <Layout>
+        <h1>Posts</h1>
+        {data.allWordpressPost.edges.map(({ node }) => (
+          <div key={node.slug}>
+            <Link to={node.slug} css={{ textDecoration: `none` }}>
+              <h3 dangerouslySetInnerHTML={{ __html: node.title }} />
+            </Link>
+            <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+            <div dangerouslySetInnerHTML={{ __html: node.date }} />
+          </div>
+        ))}
+      </Layout>
+    )
+  }
+}
 
 export default BlogPage
+
+export const pageQuery = graphql`
+  query {
+    allWordpressPost {
+      edges {
+        node {
+          title
+          excerpt
+          slug
+          date(formatString: "MMMM DD, YYYY")
+        }
+      }
+    }
+  }
+`
