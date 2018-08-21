@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import Blogcard from '../components/Blogcard'
 
 import Layout from '../components/layout'
 
@@ -14,6 +15,7 @@ const IndexPage = () => (
     <Link to="/contact/">Go to contact</Link>
     <span> </span>
     <Link to="/about/">Go to about</Link>
+    <Blogcard />
   </Layout>
 )
 

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { Hidden } from '../../node_modules/@material-ui/core'
-import SimpleMenu from './headerMenu'
+import HeaderDrawer from './HeaderDrawer'
 
 const Header = ({ siteTitle }) => (
   <div style={{ flexGrow: '1' }}>
@@ -20,8 +20,9 @@ const Header = ({ siteTitle }) => (
     >
       <Toolbar>
         <Hidden smUp>
-          <SimpleMenu />
+          <HeaderDrawer />
         </Hidden>
+
         <Typography
           display3
           style={{
@@ -30,7 +31,15 @@ const Header = ({ siteTitle }) => (
             flexGrow: 1,
           }}
         >
-          {siteTitle}
+          <Link
+            to="/"
+            style={{
+              color: 'white',
+              textDecoration: 'none',
+            }}
+          >
+            {siteTitle}
+          </Link>
         </Typography>
         <Hidden xsDown>
           <Link

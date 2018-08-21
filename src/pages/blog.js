@@ -12,7 +12,7 @@ class BlogPage extends Component {
         <h1>Posts</h1>
         {data.allWordpressPost.edges.map(({ node }) => (
           <div key={node.slug}>
-            <Link to={node.slug} css={{ textDecoration: `none` }}>
+            <Link to={`/blog/${node.slug}`} css={{ textDecoration: `none` }}>
               <h3 dangerouslySetInnerHTML={{ __html: node.title }} />
             </Link>
             <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
